@@ -15,23 +15,14 @@ app.get("/", (request, response) => {
       let collection = dataBase.collection("test");
 
       // lägga in data i databasen
-      return collection
-        .insertMany([
-          { a: 1 },
-          { a: 2 },
-          { a: 3, name: "Test product", price: 100 },
-        ])
-        .then(() => {
-          console.log("Data inserted");
 
-          // och hämta ut data från databasen.
-          return collection
-            .find({ name: "Test product" })
-            .toArray()
-            .then((results) => {
-              console.log("Found: ", results);
-              response.json(results);
-            });
+      // och hämta ut data från databasen.
+      return collection
+        .find({ name: "Test product" })
+        .toArray()
+        .then((results) => {
+          console.log("Found: ", results);
+          response.json(results);
         });
     })
     .finally(() => {
